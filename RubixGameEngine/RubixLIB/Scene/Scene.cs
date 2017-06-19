@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rubix.TestGame
+namespace Rubix.Scene
 {
-    class Run
+    class Scene
     {
-        public static void Main(string[] args)
-        {
-            
-        }
     }
 }

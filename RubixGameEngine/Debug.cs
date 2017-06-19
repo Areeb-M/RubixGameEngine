@@ -21,8 +21,9 @@ namespace Rubix
 
             Task startDebugger = new Task(debugger.runref, Task.NORMAL);
             TaskManager.AddTask(startDebugger);
-
             initialized = true;
+            Log("Successfully initialized Task Manager!");
+            Log("Successfully initialized Logger!");
         }
 
         public static void Log(Object message)

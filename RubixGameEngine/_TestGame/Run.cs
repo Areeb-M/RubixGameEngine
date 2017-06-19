@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Rubix.TestGame
 {
-    class TestGame : Rubix
+    class Run
     {
-        public TestGame(string[] args) : base(args)
+        public static void Main(string[] args)
         {
-
+            RubixGame TestGame = new TestGame(args);
+            TestGame.Run();
         }
     }
 }
