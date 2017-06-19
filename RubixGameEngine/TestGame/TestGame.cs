@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rubix
+namespace Rubix.TestGame
 {
-    public class Rubix
+    class TestGame : Rubix
     {
-        public Rubix(string[] args)
+        public TestGame(string[] args) : base(args)
         {
 
         }

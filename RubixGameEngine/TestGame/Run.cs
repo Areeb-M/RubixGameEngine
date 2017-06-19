@@ -8,5 +8,9 @@ namespace Rubix.TestGame
 {
     class Run
     {
+        public static void Main(string[] args)
+        {
+            
+        }
     }
 }
