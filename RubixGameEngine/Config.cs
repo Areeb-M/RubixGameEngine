@@ -12,6 +12,7 @@ namespace Rubix
         public static void Load(string _configFilePath)
         {
             configFilePath = _configFilePath;
+            #warning find a way to keep the configuration in order
             options = new Dictionary<string, string[]>();
 
             if (!File.Exists(configFilePath)) // Create an empty config file if none is found

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Rubix;
 
-namespace Rubix.TestGame
+namespace TestGame
 {
     class Run
     {
         public static void Main(string[] args)
         {
-            RubixGame TestGame = new TestGame(args);
+            RubixGame TestGame = new Test(args);
             TestGame.Run();
         }
     }

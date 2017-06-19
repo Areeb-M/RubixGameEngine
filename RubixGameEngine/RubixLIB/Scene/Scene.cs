@@ -4,9 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rubix.Scene
+namespace RubixLIB
 {
-    class Scene
+    public class Scene
     {
+
+        public Scene()
+        {
+
+        }
+
+        public void Initialize()
+        {
+
+        }
+
+        public void Update()
+        {
+
+        }
+
+        public void Draw()
+        {
+
+        }
+
+        public void Shutdown()
+        {
+
+        }
     }
 }

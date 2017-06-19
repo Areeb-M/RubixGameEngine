@@ -1,13 +1,19 @@
 ﻿using System;
 using Rubix;
+using RubixLIB;
 
 namespace TestGame
 {
-    class TestGame : RubixGame
+    class Test : RubixGame
     {
-        public TestGame(string[] args) : base(args)
+        public Test(string[] args) : base(args)
         {
 
+        }
+
+        public override Scene GetDefaultScene()
+        {
+            return null;
         }
     }
 }
