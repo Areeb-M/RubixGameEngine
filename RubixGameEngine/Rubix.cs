@@ -25,6 +25,7 @@ namespace Rubix
         }
 
         public abstract Scene GetDefaultScene();
+        public abstract string GetWindowTitle();
 
         public void Run()
         {

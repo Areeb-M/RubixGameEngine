@@ -15,5 +15,10 @@ namespace TestGame
         {
             return null;
         }
+
+        public override string GetWindowTitle()
+        {
+            return "Test Game v1.0.0";
+        }
     }
 }

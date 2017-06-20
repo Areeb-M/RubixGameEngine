@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Rubix;
+using RubixLIB.Graphics;
 
 namespace RubixLIB
 {
@@ -14,6 +13,23 @@ namespace RubixLIB
         public static void Initialize(Scene defaultScene)
         {
             scenes = new List<Scene>();
+
+            int width = 0;
+            int height = 0;
+            bool exists;
+
+            exists = Config.Exists("SCREEN_RESOLUTION");
+            if (!exists)
+                Config.SetOption("SCREEN_RESOLUTION", new string[] { "1280", "720" });
+
+            if (!int.TryParse(Config.GetOption("SCREEN_RESOLUTION")[0], out width) || !int.TryParse(Config.GetOption("SCREEN_RESOLUTION")[1], out height))
+            {
+                Debug.Log("SCREEN_RESOLUTION Config Setting was unreadable. Resetting to 1280x720.");
+                Config.SetOption("SCREEN_RESOLUTION", new string[] { "1280", "720" });
+                width = 1280;
+                height = 720;
+            }
+            
             LoadScene(defaultScene);            
         }
 
