@@ -27,9 +27,10 @@ namespace Rubix
         public abstract Scene GetDefaultScene();
         public abstract string GetWindowTitle();
 
+        private bool alive = true;
         public void Run()
         {
-            SceneManager.Initialize(GetDefaultScene());
+            SceneManager.Initialize(this, GetDefaultScene());
             Debug.Log("Initialized SceneManager!");
 
             bool exists;
@@ -37,7 +38,7 @@ namespace Rubix
             double timePerFixedLoop, timePerLoop, timeElapsed, lag;
             Stopwatch timer;
 
-            // Checking for Configuration -------------------------------------
+            #region Checking Config for FPS and FixedTimeStep
             exists = Config.Exists("FPS");
             if (!exists)
                 Config.SetOption("FPS", new string[] { "60" });
@@ -59,7 +60,7 @@ namespace Rubix
                 Config.SetOption("FixedTimeStep", new string[] { "20" });
                 FixedTimeStep = 20;
             }
-            // -----------------------------------------------------------------
+            #endregion
 
             lag = 0;
             timeElapsed = 0;
@@ -68,7 +69,7 @@ namespace Rubix
             timer = new Stopwatch();
 
             Debug.Log("Starting Game Loop!");
-            while (true)
+            while (alive)
             {
                 timer.Stop();
                 timeElapsed = timer.Elapsed.TotalMilliseconds;
@@ -90,11 +91,12 @@ namespace Rubix
 
         public void Shutdown()
         {
-            SceneManager.Shutdown();
             Debug.Log("Shutdown SceneManger!");
             Config.Save();
             Debug.Log("Saved Config to file!");
             TaskManager.Shutdown();
+            alive = false;
+            Console.ReadKey();
             Thread.CurrentThread.Abort();
         }
     }

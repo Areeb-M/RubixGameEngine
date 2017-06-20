@@ -62,7 +62,7 @@ namespace Rubix
                 }
                 result += "\n";
             }
-
+            File.WriteAllText(configFilePath, result);
         }
     }
 }

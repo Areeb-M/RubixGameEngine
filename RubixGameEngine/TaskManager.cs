@@ -66,9 +66,10 @@ namespace Rubix
             self.Abort();
             foreach (Task task in tasks)
             {
-                task.GetThread().Abort();
+                task.GetThread().Abort(); 
             }
             tasks.Clear();
+        #warning Add shutdown sequence to every task
         }
 
         public static void AddTask(Task task)
