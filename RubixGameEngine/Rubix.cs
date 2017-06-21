@@ -35,7 +35,7 @@ namespace Rubix
 
             bool exists;
             int FPS, FixedTimeStep;
-            double timePerFixedLoop, timePerLoop, timeElapsed, lag;
+            float timePerFixedLoop, timePerLoop, timeElapsed, lag;
             Stopwatch timer;
 
             #region Checking Config for FPS and FixedTimeStep
@@ -64,15 +64,15 @@ namespace Rubix
 
             lag = 0;
             timeElapsed = 0;
-            timePerLoop = 1000 / (double)FPS;
-            timePerFixedLoop = 1000 / (double)FixedTimeStep;
+            timePerLoop = 1000 / (float)FPS;
+            timePerFixedLoop = 1000 / (float)FixedTimeStep;
             timer = new Stopwatch();
 
             Debug.Log("Starting Game Loop!");
             while (alive)
             {
                 timer.Stop();
-                timeElapsed = timer.Elapsed.TotalMilliseconds;
+                timeElapsed = (float)timer.Elapsed.TotalMilliseconds;
                 lag += timeElapsed;
 
                 while (lag >= timePerFixedLoop)

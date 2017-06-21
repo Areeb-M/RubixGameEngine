@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RubixLIB.Entity
+namespace RubixLIB
 {
-    class Entity
+    class Model
     {
     }
 }

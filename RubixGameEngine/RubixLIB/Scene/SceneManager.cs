@@ -2,6 +2,7 @@
 using System;
 using OpenTK;
 using RubixLIB.Graphics;
+using OpenTK.Graphics.OpenGL4;
 using System.Collections.Generic;
 
 namespace RubixLIB
@@ -13,6 +14,9 @@ namespace RubixLIB
 
         static RubixGame game;
         static Window window;
+
+        // OpenGL
+        private int _vertexArray;
 
         public static void Initialize(RubixGame _game, Scene defaultScene)
         {
@@ -60,41 +64,72 @@ namespace RubixLIB
 
             window = new Window(width, height, game.GetWindowTitle(), mode);
             window.Show();
+            Debug.Log("Window Initialization Successful!");
 
             scenes = new List<Scene>();
-            LoadScene(defaultScene);            
+            LoadScene(defaultScene);
+            Debug.Log("Loaded Default Scene!");
         }
 
         public static void LoadScene(Scene addition, bool pausePrevious=true, bool hidePrevious=false)
         {
+            if (sceneCount > 0)
+            {
+                scenes[sceneCount - 1].Pause(pausePrevious);
+                scenes[sceneCount - 1].Hide(hidePrevious);
+            }
+
+            scenes.Add(addition);
+            addition.Load();
             sceneCount++;
+            Debug.Log("Scene Added!");
         }
 
-        public static void FixedUpdate(double timeElapsed) // Perform any physics calculations here
+        public static void RemoveScene(Scene removal)
         {
-
+            removal.Shutdown();
+            scenes.Remove(removal);
+            sceneCount--;
+            Debug.Log("Scene Removed!");
         }
 
-        public static void Update() // Handle User Input
+        public static void FixedUpdate(float timeElapsed) // Perform any physics calculations here
         {
-
+            foreach (Scene s in scenes)
+            {
+                s.FixedUpdate(timeElapsed);
+            }
         }
 
-        public static void Draw(double timeElapsed)
+        public static void Update() // Handle User Input and AI
+        {
+            foreach (Scene s in scenes)
+            {
+                s.Update();
+            }
+        }
+
+        public static void Draw(float timeElapsed)
         {
             if (window.CanBeginRender())
             {
-
+                foreach (Scene s in scenes)
+                {
+                    s.Draw(timeElapsed);
+                }
             } else
             {
                 Debug.Log("Window forced exit!");
                 Shutdown();
             }
             window.EndRender();
+            Debug.Log("Scene Removed!");
         }
 
         public static void Shutdown()
         {
+            foreach (Scene s in scenes)
+                s.Shutdown();
             game.Shutdown();
         }
     }

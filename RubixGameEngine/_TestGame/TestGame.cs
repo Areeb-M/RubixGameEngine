@@ -1,6 +1,7 @@
 ﻿using System;
 using Rubix;
 using RubixLIB;
+using TestGame._Scenes;
 
 namespace TestGame
 {
@@ -13,7 +14,7 @@ namespace TestGame
 
         public override Scene GetDefaultScene()
         {
-            return null;
+            return new TestScene();
         }
 
         public override string GetWindowTitle()

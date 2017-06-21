@@ -63,16 +63,18 @@
     <Compile Include="Config.cs" />
     <Compile Include="Rubix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RubixLIB\Entity\Entity.cs" />
-    <Compile Include="RubixLIB\Entity\Model.cs" />
-    <Compile Include="RubixLIB\Entity\Sprite.cs" />
-    <Compile Include="RubixLIB\Graphics\RGeometry.cs" />
+    <Compile Include="RubixLIB\Actors\Entity.cs" />
+    <Compile Include="RubixLIB\Actors\Model.cs" />
+    <Compile Include="RubixLIB\Actors\Sprite.cs" />
+    <Compile Include="RubixLIB\Graphics\Geometry.cs" />
+    <Compile Include="RubixLIB\Graphics\ShaderProgram.cs" />
     <Compile Include="RubixLIB\Graphics\Window.cs" />
     <Compile Include="RubixLIB\Scene\Scene.cs" />
     <Compile Include="RubixLIB\Scene\SceneManager.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="_TestGame\Run.cs" />
     <Compile Include="_TestGame\TestGame.cs" />
+    <Compile Include="_TestGame\_Scenes\TestScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Debug.cs" />
@@ -89,9 +91,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_TestGame\_Scenes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
