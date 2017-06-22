@@ -19,7 +19,7 @@ namespace Rubix
             queue = new MessageQueue();
             debugger = new Debugger(queue);
 
-            Task startDebugger = new Task(debugger.runref, Task.NORMAL);
+            Task startDebugger = new Task(debugger.runref, Task.LOW);
             TaskManager.AddTask(startDebugger);
             initialized = true;
             Log("Successfully initialized Task Manager!");

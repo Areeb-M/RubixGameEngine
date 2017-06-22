@@ -123,7 +123,6 @@ namespace RubixLIB
                 Shutdown();
             }
             window.EndRender();
-            Debug.Log("Scene Removed!");
         }
 
         public static void Shutdown()

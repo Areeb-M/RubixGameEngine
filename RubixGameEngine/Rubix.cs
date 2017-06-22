@@ -17,11 +17,12 @@ namespace Rubix
             if (args.Contains("config"))
                 configPath = args.ElementAt(Array.IndexOf(args, "config") + 1);
 
+            Thread.CurrentThread.Priority = ThreadPriority.Highest;
             Config.Load(configPath);
             TaskManager.Initialize();
 
-            if (args.Contains("debug"))
-                Debug.Initialize();
+            //if (args.Contains("debug"))
+            Debug.Initialize();
         }
 
         public abstract Scene GetDefaultScene();
@@ -49,6 +50,8 @@ namespace Rubix
                 Config.SetOption("FPS", new string[] { "60" });
                 FPS = 60;
             }
+            FPS += 3; // Accounts for any delay incurred by logic in the game loop
+            Debug.Log("FPS: " + FPS);
 
             exists = Config.Exists("FixedTimeStep");
             if (!exists)
@@ -67,15 +70,11 @@ namespace Rubix
             timePerLoop = 1000 / (float)FPS;
             timePerFixedLoop = 1000 / (float)FixedTimeStep;
             timer = new Stopwatch();
-
+            
             Debug.Log("Starting Game Loop!");
             while (alive)
             {
-                timer.Stop();
-                timeElapsed = (float)timer.Elapsed.TotalMilliseconds;
-                lag += timeElapsed;
-
-                while (lag >= timePerFixedLoop)
+                while (lag > timePerFixedLoop)
                 {
                     SceneManager.FixedUpdate(timePerFixedLoop);
                     lag -= timePerFixedLoop;
@@ -83,15 +82,21 @@ namespace Rubix
 
                 SceneManager.Update();
                 SceneManager.Draw(lag / timePerFixedLoop);
-                Thread.Sleep((int)(timePerLoop - timeElapsed));
 
+                timer.Stop();
+                timeElapsed = (float)timer.Elapsed.TotalMilliseconds;
+                timer.Reset();
                 timer.Start();
+                lag += timeElapsed;
+
+                if (timePerLoop > timeElapsed)
+                    Thread.Sleep((int)(timePerLoop - timeElapsed));
+                
             }
         }
 
         public void Shutdown()
         {
-            Debug.Log("Shutdown SceneManger!");
             Config.Save();
             Debug.Log("Saved Config to file!");
             TaskManager.Shutdown();
