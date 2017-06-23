@@ -66,6 +66,7 @@ namespace RubixLIB.Graphics
         public void UseAdaptiveVSync()
         {
             VSync = VSyncMode.Adaptive;
+            Debug.Log("Turned on Adaptive VSync");
         }
 
         #region SetBackgroundColor()
