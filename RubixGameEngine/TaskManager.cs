@@ -7,6 +7,7 @@ namespace Rubix
 
     class Task
     {
+        #region Task Priorities
         public const int NOW = 0;
         public const int HIGH = 1;
         public const int NORMAL = 2;
@@ -19,6 +20,7 @@ namespace Rubix
             {NORMAL, ThreadPriority.Normal},
             {LOW, ThreadPriority.BelowNormal}
         };
+        #endregion
 
         private ThreadStart task;
         private Thread parent;

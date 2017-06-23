@@ -100,6 +100,7 @@ namespace RubixLIB
 
         public abstract void OnLoad();
         public abstract void OnUpdate();
+        public abstract void OnFixedUpdate(float timeElapsed);
         public abstract void OnDraw(float timeElapsed);
     }
 }

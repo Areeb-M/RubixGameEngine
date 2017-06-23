@@ -41,6 +41,7 @@ namespace RubixLIB.Graphics
 
     }
 
+    #region Shader Type Classes
     public class Shader
     {
         public ShaderType type;
@@ -76,5 +77,6 @@ namespace RubixLIB.Graphics
             this.source = File.ReadAllText(path);
         }
     }
+    #endregion
 
 }

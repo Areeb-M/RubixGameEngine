@@ -23,8 +23,32 @@ namespace RubixLIB.Graphics
         {
             this.background = new Color4(0, 0, 0, 1);
             swapBuffers = new ThreadStart(SwapBuffers);
+
+            #region VSync Config Check
+            bool exists;
+            string vsyncMode;
+
+            exists = Config.Exists("VSync");
+            if (!exists)
+                Config.SetOption("VSync", new string[] { "On" });
+
+            vsyncMode = Config.GetOption("VSync")[0];
+            if (vsyncMode != "On" || vsyncMode != "Off" || vsyncMode != "Adaptive")
+            {
+                Debug.Log("VSync setting was unreadable, resetting to On!");
+                vsyncMode = "On";
+            }
+
+            if (vsyncMode == "On")
+                VSync = VSyncMode.On;
+            else if (vsyncMode == "Off")
+                VSync = VSyncMode.Off;
+            else
+                VSync = VSyncMode.Adaptive;
+            #endregion
         }
 
+        #region Window Settings
         public void Show()
         {
             this.Visible = true;
@@ -48,7 +72,9 @@ namespace RubixLIB.Graphics
         {
             GL.Viewport(0, 0, Width, Height);
         }
+        #endregion 
 
+        #region VSync 
         public void ToggleVSync()
         {
             if (VSync == VSyncMode.On || VSync == VSyncMode.Adaptive)
@@ -69,6 +95,13 @@ namespace RubixLIB.Graphics
             Debug.Log("Turned on Adaptive VSync");
         }
 
+        public void SetVSyncMode(VSyncMode mode)
+        {
+            VSync = mode;
+            Debug.Log("Enabled " + mode);
+        }
+        #endregion
+
         #region SetBackgroundColor()
         public void SetBackgroundColor(Color4 color)
         {
@@ -80,6 +113,7 @@ namespace RubixLIB.Graphics
         }
         #endregion
 
+        #region Render
         public bool CanBeginRender()
         {
             ProcessEvents();
@@ -96,5 +130,6 @@ namespace RubixLIB.Graphics
         {
             SwapBuffers();
         }
+        #endregion
     }
 }

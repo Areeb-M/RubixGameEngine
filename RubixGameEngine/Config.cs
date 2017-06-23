@@ -15,6 +15,7 @@ namespace Rubix
             #warning find a way to keep the configuration in order
             options = new Dictionary<string, string[]>();
 
+            #region Load Configuration File
             if (!File.Exists(configFilePath)) // Create an empty config file if none is found
             {
                 File.Create(configFilePath);
@@ -33,6 +34,7 @@ namespace Rubix
                 args.RemoveAt(0);
                 options[option] = args.ToArray();
             }
+            #endregion
         }
 
         public static bool Exists(string option)

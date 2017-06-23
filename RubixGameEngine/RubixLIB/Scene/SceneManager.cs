@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace RubixLIB
 {
-    class SceneManager
+    public class SceneManager
     {
         static List<Scene> scenes;
         static int sceneCount = 0;
