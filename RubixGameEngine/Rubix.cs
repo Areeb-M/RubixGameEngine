@@ -50,7 +50,7 @@ namespace Rubix
                 Config.SetOption("FPS", new string[] { "60" });
                 FPS = 60;
             }
-            FPS += 3; // Accounts for any delay incurred by logic in the game loop
+            FPS += 1; // Accounts for any delay incurred by logic in the game loop
             Debug.Log("FPS: " + FPS);
 
             exists = Config.Exists("FixedTimeStep");
@@ -74,6 +74,9 @@ namespace Rubix
             Debug.Log("Starting Game Loop!");
             while (alive)
             {
+                timer.Reset();
+                timer.Start();
+
                 while (lag > timePerFixedLoop)
                 {
                     SceneManager.FixedUpdate(timePerFixedLoop);
@@ -82,16 +85,14 @@ namespace Rubix
 
                 SceneManager.Update();
                 SceneManager.Draw(lag / timePerFixedLoop);
-
-                timer.Stop();
+                
                 timeElapsed = (float)timer.Elapsed.TotalMilliseconds;
-                timer.Reset();
-                timer.Start();
                 lag += timeElapsed;
 
                 if (timePerLoop > timeElapsed)
                     Thread.Sleep((int)(timePerLoop - timeElapsed));
-                
+
+                Debug.Log(timer.Elapsed.TotalMilliseconds);
             }
         }
 

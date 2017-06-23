@@ -1,6 +1,7 @@
 ﻿using Rubix;
 using OpenTK;
 using OpenTK.Graphics;
+using System.Threading;
 using OpenTK.Graphics.OpenGL4;
 
 namespace RubixLIB.Graphics
@@ -14,11 +15,14 @@ namespace RubixLIB.Graphics
 
         private Color4 background;
 
+        private ThreadStart swapBuffers;
+
         public Window(int width, int height, string title, GameWindowFlags windowMode) : 
             base(width, height,  GraphicsMode.Default, title, windowMode, DisplayDevice.Default,
                 4, 0, GraphicsContextFlags.ForwardCompatible)
         {
             this.background = new Color4(0, 0, 0, 1);
+            swapBuffers = new ThreadStart(SwapBuffers);
         }
 
         public void Show()
@@ -43,6 +47,25 @@ namespace RubixLIB.Graphics
         private void ResizeViewport()
         {
             GL.Viewport(0, 0, Width, Height);
+        }
+
+        public void ToggleVSync()
+        {
+            if (VSync == VSyncMode.On || VSync == VSyncMode.Adaptive)
+            {
+                VSync = VSyncMode.Off;
+                Debug.Log("Turned VSync Off");
+            }
+            else
+            {
+                VSync = VSyncMode.On;
+                Debug.Log("Turned VSync On");
+            }
+        }
+
+        public void UseAdaptiveVSync()
+        {
+            VSync = VSyncMode.Adaptive;
         }
 
         #region SetBackgroundColor()
