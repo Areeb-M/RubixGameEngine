@@ -17,6 +17,7 @@ namespace RubixLIB
             hidden = false;
         }
 
+        #region Functions called by SceneManager
         public void Load()
         {
             foreach (List<Entity> layer in spriteBatch)
@@ -65,6 +66,7 @@ namespace RubixLIB
                     entity.FixedUpdate(timeElapsed);
                 }
             }
+            OnFixedUpdate(timeElapsed);
         }
 
         public void Update()
@@ -72,6 +74,7 @@ namespace RubixLIB
             if (!paused)
                 OnUpdate();
         }
+        #endregion
 
         #region AddLayer
         public void AddLayer()
