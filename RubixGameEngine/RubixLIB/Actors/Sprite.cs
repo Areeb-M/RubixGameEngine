@@ -6,10 +6,12 @@ using OpenTK.Graphics.OpenGL4;
 
 namespace RubixLIB
 {
-    class Sprite : Entity
+    public class Sprite : Entity
     {
         private int width;
         private int height;
+
+        private Texture2D[] costumes;
 
         #region Width and Height properties
         public int Width
@@ -23,10 +25,9 @@ namespace RubixLIB
         }
         #endregion
 
-        public Sprite(Vector4 velocity, Vector4 position, int width, int height) : base(velocity, position)
+        public Sprite(Vector4 velocity, Vector4 position) : base(velocity, position)
         {
-            this.width = width;
-            this.height = height;            
+                   
         }
 
         public override void Load()

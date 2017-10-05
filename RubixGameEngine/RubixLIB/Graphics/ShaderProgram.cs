@@ -39,6 +39,10 @@ namespace RubixLIB.Graphics
             GL.UseProgram(programID);
         }
 
+        public static void ResetProgram()
+        {
+            GL.UseProgram(0);
+        }
     }
 
     #region Shader Type Classes
