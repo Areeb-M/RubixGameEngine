@@ -68,6 +68,7 @@
     <Compile Include="RubixLIB\Actors\Sprite.cs" />
     <Compile Include="RubixLIB\Graphics\Geometry.cs" />
     <Compile Include="RubixLIB\Graphics\ShaderProgram.cs" />
+    <Compile Include="RubixLIB\Graphics\Texture2D.cs" />
     <Compile Include="RubixLIB\Graphics\Window.cs" />
     <Compile Include="RubixLIB\Scene\Scene.cs" />
     <Compile Include="RubixLIB\Scene\SceneManager.cs" />
