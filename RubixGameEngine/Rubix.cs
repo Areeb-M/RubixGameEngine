@@ -11,6 +11,11 @@ namespace Rubix
     {
         
         public string executablePath = Directory.GetCurrentDirectory();
+
+        /// <summary>
+        /// Constructor for RubixGame class. Parses Command Line Arguments, Loads <see cref="Config.cs">Configuration</see>, Initializes <see cref="TaskManager">TaskManager</see> and conditionally <see cref="Debug">Debugger</see>
+        /// </summary>
+        /// <param name="args">Command Line Arguments</param>
         public RubixGame(string[] args)
         {
             string configPath = "options.config";
@@ -21,14 +26,21 @@ namespace Rubix
             Config.Load(configPath);
             TaskManager.Initialize();
 
-            //if (args.Contains("debug"))
-            Debug.Initialize();
+            if (args.Contains("debug"))
+                Debug.Initialize();
         }
 
+        /// <returns>Should return the starting <Scene cref="RubixLIB.Scene.Scene"/>.</returns>
         public abstract Scene GetDefaultScene();
+
+        /// <returns>Should return the </returns>
         public abstract string GetWindowTitle();
 
         private bool alive = true;
+
+        /// <summary>
+        /// Executes main loop for the GAme.
+        /// </summary>
         public void Run()
         {
             SceneManager.Initialize(this, GetDefaultScene());
@@ -96,6 +108,15 @@ namespace Rubix
             }
         }
 
+        /// <summary>
+        /// Executes Shutdown Sequence for Game.
+        /// <para>
+        /// Steps:
+        ///     1)Save Configuration
+        ///     2)Shutdown Task Manager
+        ///     3)Abort Current Thread
+        /// </para>
+        /// </summary>
         public void Shutdown()
         {
             Config.Save();
